@@ -23,11 +23,6 @@
                 </div>
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-secondary"
-                            v-on:click="showModal('NewFile')"
-                            v-bind:title="lang.btn.file">
-                        <i class="far fa-file"/>
-                    </button>
-                    <button type="button" class="btn btn-secondary"
                             v-on:click="showModal('NewFolder')"
                             v-bind:title="lang.btn.folder">
                         <i class="far fa-folder"/>

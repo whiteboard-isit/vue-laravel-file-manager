@@ -1,6 +1,26 @@
 import HTTP from './axios';
 
 export default {
+  fmd() {
+    let params = {};
+    if (window.fmd_params) {
+      params = window.fmd_params;
+    }
+    return params;
+  },
+  uppendparams(data) {
+    const params = this.fmd();
+    if (data instanceof FormData) {
+      Object.keys(params).forEach((key) => {
+        data.append(key, params[key]);
+      });
+      return data;
+    }
+    Object.keys(data).forEach((key) => {
+      params[key] = data[key];
+    });
+    return params;
+  },
   /**
    * Create new file
    * @param disk
@@ -9,7 +29,8 @@ export default {
    * @returns {AxiosPromise<any>}
    */
   createFile(disk, path, name) {
-    return HTTP.post('create-file', { disk, path, name });
+    const params = this.uppendparams({ disk, path, name });
+    return HTTP.post('create-file', params);
   },
 
   /**
@@ -18,7 +39,8 @@ export default {
    * @returns {*}
    */
   updateFile(formData) {
-    return HTTP.post('update-file', formData);
+    const params = this.uppendparams(formData);
+    return HTTP.post('update-file', params);
   },
 
   /**
@@ -27,7 +49,8 @@ export default {
    * @returns {*}
    */
   createDirectory(data) {
-    return HTTP.post('create-directory', data);
+    const params = this.uppendparams(data);
+    return HTTP.post('create-directory', params);
   },
 
   /**
@@ -37,7 +60,8 @@ export default {
    * @returns {AxiosPromise<any>}
    */
   upload(data, config) {
-    return HTTP.post('upload', data, config);
+    const params = this.uppendparams(data);
+    return HTTP.post('upload', params, config);
   },
 
   /**
@@ -46,7 +70,8 @@ export default {
    * @returns {*}
    */
   delete(data) {
-    return HTTP.post('delete', data);
+    const params = this.uppendparams(data);
+    return HTTP.post('delete', params);
   },
 
   /**
@@ -55,7 +80,8 @@ export default {
    * @returns {*}
    */
   rename(data) {
-    return HTTP.post('rename', data);
+    const params = this.uppendparams(data);
+    return HTTP.post('rename', params);
   },
 
   /**
@@ -64,7 +90,8 @@ export default {
    * @returns {*}
    */
   paste(data) {
-    return HTTP.post('paste', data);
+    const params = this.uppendparams(data);
+    return HTTP.post('paste', params);
   },
 
   /**
@@ -73,7 +100,8 @@ export default {
    * @returns {*}
    */
   zip(data) {
-    return HTTP.post('zip', data);
+    const params = this.uppendparams(data);
+    return HTTP.post('zip', params);
   },
 
   /**
@@ -82,6 +110,7 @@ export default {
    * @param data
    */
   unzip(data) {
-    return HTTP.post('unzip', data);
+    const params = this.uppendparams(data);
+    return HTTP.post('unzip', params);
   },
 };

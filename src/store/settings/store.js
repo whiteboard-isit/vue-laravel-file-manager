@@ -110,10 +110,10 @@ export default {
             name: 'cut',
             icon: 'fas fa-cut',
           },
-          {
-            name: 'rename',
-            icon: 'far fa-edit',
-          },
+          // {
+          //   name: 'rename',
+          //   icon: 'far fa-edit',
+          // },
           {
             name: 'paste',
             icon: 'far fa-clipboard',

@@ -1,12 +1,20 @@
 import HTTP from './axios';
 
 export default {
+  fmd() {
+    let params = {};
+    if (window.fmd_params) {
+      params = window.fmd_params;
+    }
+    return params;
+  },
   /**
    * Get configuration data from server
    * @returns {*}
    */
   initialize() {
-    return HTTP.get('initialize');
+    const params = this.fmd();
+    return HTTP.get('initialize', { params });
   },
 
   /**
@@ -16,7 +24,10 @@ export default {
    * @returns {*}
    */
   tree(disk, path) {
-    return HTTP.get('tree', { params: { disk, path } });
+    const params = this.fmd();
+    params.disk = disk;
+    params.path = path;
+    return HTTP.get('tree', { params });
   },
 
   /**
@@ -25,7 +36,10 @@ export default {
    * @returns {*}
    */
   selectDisk(disk) {
-    return HTTP.get('select-disk', { params: { disk } });
+    const params = this.fmd();
+    params.disk = disk;
+
+    return HTTP.get('select-disk', { params });
   },
 
   /**
@@ -35,7 +49,11 @@ export default {
    * @returns {*}
    */
   content(disk, path) {
-    return HTTP.get('content', { params: { disk, path } });
+    const params = this.fmd();
+    params.disk = disk;
+    params.path = path;
+
+    return HTTP.get('content', { params });
   },
 
   /**
@@ -52,7 +70,11 @@ export default {
    * @returns {*}
    */
   url(disk, path) {
-    return HTTP.get('url', { params: { disk, path } });
+    const params = this.fmd();
+    params.disk = disk;
+    params.path = path;
+
+    return HTTP.get('url', { params });
   },
 
   /**
@@ -62,7 +84,11 @@ export default {
    * @returns {*}
    */
   getFile(disk, path) {
-    return HTTP.get('download', { params: { disk, path } });
+    const params = this.fmd();
+    params.disk = disk;
+    params.path = path;
+
+    return HTTP.get('download', { params });
   },
 
   /**
@@ -72,9 +98,13 @@ export default {
    * @returns {*}
    */
   getFileArrayBuffer(disk, path) {
+    const params = this.fmd();
+    params.disk = disk;
+    params.path = path;
+
     return HTTP.get('download', {
       responseType: 'arraybuffer',
-      params: { disk, path },
+      params,
     });
   },
 
@@ -85,9 +115,13 @@ export default {
    * @returns {*}
    */
   thumbnail(disk, path) {
+    const params = this.fmd();
+    params.disk = disk;
+    params.path = path;
+
     return HTTP.get('thumbnails', {
       responseType: 'arraybuffer',
-      params: { disk, path },
+      params,
     });
   },
 
@@ -98,9 +132,13 @@ export default {
    * @return {*}
    */
   preview(disk, path) {
+    const params = this.fmd();
+    params.disk = disk;
+    params.path = path;
+
     return HTTP.get('preview', {
       responseType: 'arraybuffer',
-      params: { disk, path },
+      params,
     });
   },
 
@@ -111,9 +149,13 @@ export default {
    * @return {*}
    */
   download(disk, path) {
+    const params = this.fmd();
+    params.disk = disk;
+    params.path = path;
+
     return HTTP.get('download', {
       responseType: 'arraybuffer',
-      params: { disk, path },
+      params,
     });
   },
 };
