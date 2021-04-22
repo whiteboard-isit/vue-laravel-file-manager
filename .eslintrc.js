@@ -32,6 +32,7 @@ module.exports = {
       'error', {
         'allowUsingIterationVar': true,
       }],
+      "linebreak-style": 0
   },
   parserOptions: {
     parser: 'babel-eslint',
